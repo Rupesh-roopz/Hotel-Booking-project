@@ -1,0 +1,189 @@
+html {
+    font-family: 'Georama', sans-serif;
+}
+#loginForm{
+    width : 25%;
+}
+
+#loginFormWrapper{
+    background-color: cadetblue;
+    width : 100%;
+    height: 91vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hotelData {
+ display :flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+
+}
+#nameFont{
+    height : 25px;
+    font-family: 'Georama', sans-serif;
+    font-size: 1.5625rem;
+    color :rgb(23, 95, 202);
+    font-weight:700 ;
+    cursor: pointer;
+}
+#descriptionFonts{
+    height : 6.25%;
+    font-family: 'Georama', sans-serif;
+    font-size: 1rem;
+    color :rgb(0, 0, 0);
+    font-weight:100   ;
+}
+
+#hotelID{
+    height :12.5em;
+    border :0.125% solid gray;
+    margin: 1.25%;
+    box-shadow:10px 10px 50px lightskyblue;  
+}
+
+#priceID{
+    font-size: 1.25em;
+    color :rgb(23, 95, 202);
+    font-weight:600 ;
+    
+}
+img {
+    cursor:pointer;
+}
+
+.profileIcon{
+    font-size: 25px;
+    color: white;
+    cursor: pointer;
+}
+
+.profileWrapper{
+    display: flex;
+    color: white;
+    align-items: center;
+    
+}
+
+.navBarStyle {
+    padding-inline-start: 30px;
+    padding-inline-end:40px;
+}
+
+.bookedHotel-form-Wrapper {
+ margin-left: auto;
+ margin-right: auto;
+ 
+}
+
+.bookedHotel-name-Wrapper{
+    font-size: 50px;
+    height : 50px;
+    
+}
+
+.bookedHotel-Form {
+    box-shadow:10px 10px 50px lightskyblue;  
+}
+
+.inputContainer{
+    padding : 10px;
+}
+
+.wrapper{
+    position: absolute;
+    left : 50%;
+    top : 5%;
+    box-shadow:10px 10px 50px rgb(184, 150, 101); 
+    border-radius: 10px; 
+    z-index: 1;
+}
+
+.homeButtons {
+    margin : 10px;
+    background-color: black;
+    border : 1px solid white;
+    color :white
+}
+
+.homeButtons:hover {
+    background-color: rgb(184, 150, 101); 
+}
+
+.welcomeNote {
+    color :white;
+    margin: 10px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.homeImage-wrapper{
+    height: 100vh;
+    width: 100%;
+
+}
+
+.loginImage-wrapper{
+    height: 100vh;
+    width: 100%;
+    filter : blur(4px)
+}
+
+.login-form{
+    position : absolute;
+    z-index: 1;
+    padding: 10px;
+}
+
+.login-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-label{
+    font-size: 1.5rem;
+    color: white;
+}
+
+.login-buttons {
+    padding: 16px;
+    display: flex;
+    justify-content :space-around;
+    align-items: center;
+}
+
+.signIn-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signIn-label{
+    color: white;
+}
+
+.signIn-form{
+    position : absolute;
+    z-index: 1;
+    width: max-content;
+}
+.errors-class{
+    font-size: 1rem;
+    background-color: red;
+    color:white;
+    font-weight: 500;
+}
+
+.signin-link{
+    color : white;
+    cursor: pointer;
+    font-size: medium;
+}
+
+.signin-link:hover {
+    color : white;
+    font-size: large;
+}
