@@ -8,7 +8,7 @@ class HotelPreviewContainer extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
-            hotelData : []
+            hotelData : {}
         }
     }
 
@@ -19,11 +19,11 @@ class HotelPreviewContainer extends React.Component {
     getSelectedHotelDetails = () => {
         api.getHotelData()
             .then((res) => {
-                console.log(res.data)
+                console.log('hotel', res.data)
                 this.setState({ hotelData : res.data })
             })
             .catch((e) => {
-                if (e.response.status === 403) { this.props.history.push('/') }
+                if (e.response.status === 403) { this.props.history.push('/forbidden') }
             })
     }
 

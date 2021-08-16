@@ -19,11 +19,10 @@ class HotelsList extends React.Component {
     getData = () => {
         api.getHotelDetails()
             .then((res) => {
-                console.log(res.data)
                 this.setState({ hotelsList : res.data })
             })
             .catch((e) => {
-                if (e.response.status === 403) { this.props.history.push('/') }
+                if (e.response.status === 403) { this.props.history.push('/forbidden') }
             })
     }
 

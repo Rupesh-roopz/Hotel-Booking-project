@@ -1,15 +1,18 @@
 function Admin (props) {
     return (
         <div className = "container">
-            <div className="col-3">
-                <button
-                    className="btn btn-primary"
-                    onClick = {props.showHotelsList}>
-                        Show Hotels
-                </button>
+            <div className="row hotelAdd-header">
+                <div><h1>Add New Hotel Details</h1></div>
             </div>
             <div className = "row">
-                <form onSubmit = {props.onClick}>
+                <div className="hotelSucess-bar">
+                    {(props.state.isSucessfull === true)
+                        ? <div className="hotelSucess-barInside">
+                            <p className="hotelSucess-message">Hotel data Sucessfully added...</p>
+                        </div>
+                        : <div/>}
+                </div>
+                <form onSubmit = {props.onSubmit}>
                     <div className = "row">
                         <div className = "col">
                             <label
@@ -28,6 +31,16 @@ function Admin (props) {
                                     value = {props.state.hotelName}
                                     required
                                 />
+                                {!(props.state.error === null)
+                                    ? <div className="errors-class">
+                                        {props.state.error.hotelNameError}
+                                    </div>
+                                    : <div/>}
+                                {(props.state.serverError.hotelExistsError !== undefined)
+                                    ? <div className="errors-class">
+                                        {props.state.serverError.hotelExistsError.errorMessage}
+                                    </div>
+                                    : <div></div>}
                             </div>
                             <div className = "col-9"></div>
                         </div>
@@ -62,6 +75,11 @@ function Admin (props) {
                                 onChange = {props.onChange}
                                 required
                             />
+                            {!(props.state.error === null)
+                                ? <div className="errors-class">
+                                    {props.state.error.roomsAvailableError}
+                                </div>
+                                : <div/>}
                         </div>
                     </div>
                     <div className = "row">
@@ -79,6 +97,11 @@ function Admin (props) {
                                 value = {props.state.address}
                                 required
                             />
+                            {!(props.state.error === null)
+                                ? <div className="errors-class">
+                                    {props.state.error.addressError}
+                                </div>
+                                : <div/>}
                         </div>
                     </div>
                     <div className = "row">
@@ -100,6 +123,11 @@ function Admin (props) {
                                     value = {props.state.phone}
                                     required
                                 />
+                                {!(props.state.error === null)
+                                    ? <div className="errors-class">
+                                        {props.state.error.phoneNumberError}
+                                    </div>
+                                    : <div/>}
                             </div>
                             <div className = "col-9"></div>
                         </div>
@@ -121,45 +149,13 @@ function Admin (props) {
                                 cols = "50"
                                 required
                             />
+                            {!(props.state.error === null)
+                                ? <div className="errors-class">
+                                    {props.state.error.descriptionError}
+                                </div>
+                                : <div/>}
                         </div>
                     </div>
-                    {/* <div className = "row">
-                        <fieldset>
-                            <legend>
-                                    Location Co-ordinates
-                            </legend>
-                            <div className = "col-4">
-                                <label
-                                    htmlFor = "longitude"
-                                    className = "form-label">
-                                        Longitude
-                                </label>
-                                <input
-                                    id = "longitude"
-                                    type = "text"
-                                    className = "form-control"
-                                    onChange = {props.onChange}
-                                    value = {props.state.longitude}
-                                    required
-                                />
-                            </div>
-                            <div className = "col-4">
-                                <label
-                                    htmlFor = "lattitude"
-                                    className = "form-label">
-                                        Lattitude
-                                </label>
-                                <input
-                                    id = "lattitude"
-                                    type = "text"
-                                    className = "form-control"
-                                    onChange = {props.onChange}
-                                    value = {props.state.lattitude}
-                                    required
-                                />
-                            </div>
-                        </fieldset>
-                    </div> */}
                     <div className = "row">
                         <fieldset>
                             <legend>
@@ -167,52 +163,68 @@ function Admin (props) {
                             </legend>
                             <div className = "col-4">
                                 <label
-                                    htmlFor = "singleRoom"
+                                    htmlFor = "Single"
                                     className = "form-label">
                                         Single Room
                                 </label>
                                 <input
-                                    id = "singleRoom"
+                                    id = "Single"
                                     type = "text"
                                     className = "form-control"
                                     onChange = {props.onChange}
-                                    value = {props.state.singleRoom}
+                                    value = {props.state.Single}
                                     required
                                 />
+                                {!(props.state.error === null)
+                                    ? <div className="errors-class">
+                                        {props.state.error.SingleError}
+                                    </div>
+                                    : <div/>}
                             </div>
                             <div className = "col-4">
                                 <label
-                                    htmlFor = "doubleRoom"
+                                    htmlFor = "Double"
                                     className = "form-label">
                                         Double Room
                                 </label>
                                 <input
-                                    id = "doubleRoom"
+                                    id = "Double"
                                     type = "text"
                                     className = "form-control"
                                     onChange = {props.onChange}
-                                    value = {props.state.doubleRoom}
+                                    value = {props.state.Double}
                                     required
                                 />
+                                {!(props.state.error === null)
+                                    ? <div className="errors-class">
+                                        {props.state.error.DoubleError}
+                                    </div>
+                                    : <div/>}
                             </div>
                             <div className = "col-4">
                                 <label
-                                    htmlFor = "suitRoom"
+                                    htmlFor = "Suit"
                                     className = "form-label">
                                         Suit Room
                                 </label>
                                 <input
-                                    id = "suitRoom"
+                                    id = "Suit"
                                     type = "text"
                                     className = "form-control"
                                     onChange = {props.onChange}
-                                    value = {props.state.suitRoom}
+                                    value = {props.state.Suit}
                                     required
                                 />
+                                {!(props.state.error === null)
+                                    ? <div className="errors-class">
+                                        {props.state.error.SuitError}
+                                    </div>
+                                    : <div/>}
+
                             </div>
                         </fieldset>
                     </div>
-                    <div className = "col">
+                    <div className = "col hotelAdd-buttonWrapper">
                         <button
                             type = "sumbit"
                             className = "btn btn-primary">
@@ -221,7 +233,6 @@ function Admin (props) {
                     </div>
                 </form>
             </div>
-
         </div>
     )
 }

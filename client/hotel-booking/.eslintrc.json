@@ -37,7 +37,6 @@
             "beforeColon": true,
             "afterColon": true
         }]
-        // "no-undef" : 1
             
     }
 }

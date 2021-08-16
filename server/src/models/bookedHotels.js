@@ -2,14 +2,16 @@ const mongoose = require('mongoose');
 
 const BookedHotelsSchema = mongoose.Schema({
     hotelName : String,
-    dateOfBooking : Date,
-    checkInDate : Date,
-    checkOutDate : Date,
+    recipientName : String,
+    dateOfBooking : String,
+    checkInDate : String,
+    checkOutDate : String,
     typeOfRoom : String,
     TotalBookedRooms : Number,
     totalPrice : Number,
-    isBooked : Boolean,
-    PaymentStatus : Boolean,
+    totalDays : Number,
+    paymentType : String,
+    PaymentDetails : String,
 });
 
 module.exports = mongoose.model('BookedHotel', BookedHotelsSchema);

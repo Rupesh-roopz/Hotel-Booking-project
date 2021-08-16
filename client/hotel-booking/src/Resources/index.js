@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 const instance = axios.create({
-    baseURL : 'http://localhost:8800'
+    baseURL : 'http://localhost:8800',
+    headers : { Authorization : `Bearer ${sessionStorage.getItem('token')}` }
 })
 
 export default {
@@ -9,60 +10,67 @@ export default {
         instance({
             method : 'POST',
             url : '/hotels/add',
-            data : state,
-            headers : {
-                Authorization : `Bearer ${sessionStorage.getItem('login')}`
-            }
+            data : state
         }),
     getHotelDetails : () =>
         instance({
             method : 'GET',
-            url : '/hotels/showHotels',
-            headers : {
-                Authorization : `Bearer ${sessionStorage.getItem('login')}`
-            }
+            url : '/hotels/list'
         }),
     postHotelData : (data) =>
         instance({
             method : 'POST',
-            url : '/showHotel/hotelPreview',
-            data : data,
-            headers : {
-                Authorization : `Bearer ${sessionStorage.getItem('login')}`
-            }
+            url : '/hotel/preview',
+            data : data
         }),
     getHotelData : () =>
         instance({
             method : 'GET',
-            url : '/showHotel/hotelPreview',
-            headers : {
-                Authorization : `Bearer ${sessionStorage.getItem('login')}`
+            url : '/hotel/preview',
+            params : {
+                ID : sessionStorage.getItem('hotelId')
             }
         }),
-    postNewUser : (states) =>
+    postNewUser : (state) =>
         instance({
             method : 'POST',
-            url : '/users/signIn',
-            data : states,
-            headers : {
-                Authorization : `Bearer ${sessionStorage.getItem('login')}`
-            }
+            url : '/user/signIn',
+            data : state
         }),
     postUserData : (state) =>
         instance({
             method : 'POST',
-            url : '/users/login',
-            data : state,
-            headers : {
-                Authorization : `Bearer ${sessionStorage.getItem('login')}`
-            }
+            url : '/user/logIn',
+            data : state
         }),
     getUserData : () =>
         instance({
             method : 'GET',
-            url : '/users/login',
-            headers : {
-                Authorization : `Bearer ${sessionStorage.getItem('login')}`
+            url : '/user/profile',
+            params : {
+                ID : sessionStorage.getItem('userName')
+            }
+        }),
+    postBookedHotelData : (state) =>
+        instance({
+            method : 'POST',
+            url : '/bookedHotel/add',
+            data : state
+        }),
+    getBookedHotelData : () =>
+        instance({
+            method : 'GET',
+            url : '/bookedHotel/list',
+            params : {
+                ID : sessionStorage.getItem('userName')
+            }
+        }),
+    getSelectedHotelData : () =>
+        instance({
+            method : 'GET',
+            url : '/bookedHotel/view',
+            params : {
+                ID : sessionStorage.getItem('bookedHotelId')
             }
         })
 }

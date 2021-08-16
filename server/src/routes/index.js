@@ -8,10 +8,10 @@ const showHotel = require('./showHotelRoute');
 
 
 const router = () => {
-    app.use('/users', users);
+    app.use('/user', users);
     app.use('/hotels', hotels);
     app.use('/bookedHotel', bookedHotel);
-    app.use('/showHotel', showHotel);
+    app.use('/hotel', showHotel);
 
     return app;
 };

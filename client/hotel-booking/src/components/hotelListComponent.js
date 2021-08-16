@@ -5,12 +5,6 @@ function HotelList (props) {
     console.log(props)
     return (
         <div className = "container-flex">
-            <div className = "conatiner">
-                <nav className = "navbar">
-                    <button className = "btn btn-light" onClick = {props.showHome}>Home</button>
-                    <button className = "btn btn-light" onClick = {props.onClick}>Add Hotel</button>
-                </nav>
-            </div>
             <table className = "table table-striped table-hover table-bordered table-sm">
                 <thead>
                     <tr>
@@ -20,8 +14,6 @@ function HotelList (props) {
                         <th scope = "col">Available Rooms</th>
                         <th scope = "col">Address</th>
                         <th scope = "col">phone</th>
-                        <th scope = "col">longitude</th>
-                        <th scope = "col">lattitude</th>
                         <th scope = "col">single Room Price</th>
                         <th scope = "col">double Room Price</th>
                         <th scope = "col">suit Room Price</th>
@@ -38,14 +30,13 @@ function HotelList (props) {
                                 <td>{data.roomsAvailable}</td>
                                 <td>{data.address}</td>
                                 <td>{data.phone}</td>
-                                <td>{data.longitude}</td>
-                                <td>{data.lattitude}</td>
-                                <td>{data.singleRoom}</td>
-                                <td>{data.doubleRoom}</td>
-                                <td>{data.suitRoom}</td>
+                                <td>{data.Single}</td>
+                                <td>{data.Double}</td>
+                                <td>{data.Suit}</td>
                                 <td>{data.description}</td>
                             </tr>
-                        )}
+                        )
+                    }
                 </tbody>
             </table>
         </div>

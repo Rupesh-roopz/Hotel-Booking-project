@@ -1,17 +1,14 @@
 const HotelData = require('../models/hotelsData');
 
-let selectedHotelData = [];
-
 selectedHotel = (req, res) => {
-    console.log(req.body.hotel);
     HotelData.findOne({hotelName : req.body.hotel})
         .then((data) => {
             if (data) {
                 selectedHotelData = data;
-                res.writeHead(200);
+                res.status(200).json({hotelID : data._id});
                 res.end();
             } else {
-                res.writeHead(401);
+                res.status(401);
                 res.end();
             }
         })
@@ -21,7 +18,19 @@ selectedHotel = (req, res) => {
 };
 
 sendHotelPreview =(req, res) => {
-    res.send(selectedHotelData);
+    HotelData.findOne({_id : req.query.ID})
+        .then((data) => {
+            if (data) {
+                res.status(200).json(data);
+                res.end();
+            } else {
+                res.status(401);
+                res.end();
+            }
+        })
+        .catch((e) => {
+            res.status(500);
+        });
 };
 
 module.exports = {selectedHotel, sendHotelPreview};

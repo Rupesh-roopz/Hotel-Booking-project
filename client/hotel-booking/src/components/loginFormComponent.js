@@ -1,13 +1,13 @@
 import homeImg from '../asserts/images/homeImg.jpg'
-import React from 'react'
+
 function LoginForm (props) {
     return (
         <div className="login-wrapper">
             <form onSubmit = {props.onSubmit} id ="loginForm" className="login-form row" >
                 <div className="row">
-                    {!(props.state.error === undefined)
+                    {!(props.state.serverError === null)
                         ? <div className="errors-class">
-                            {props.state.error}
+                            {props.state.serverError}
                         </div>
                         : <div/>}
                 </div>
@@ -21,12 +21,17 @@ function LoginForm (props) {
                         type = "email"
                         className ="form-control"
                         id = "email"
-                        placeholder = "ex: JohnWick@example.com"
+                        placeholder = "Enter email"
                         onChange = {props.onChange}
                         value = {props.state.email}
                         ref = {props.userReference}
                         required
                     />
+                    {(props.state.clientError !== null)
+                        ? <div className="errors-class">
+                            {props.state.clientError.emailError}
+                        </div>
+                        : <div/>}
                 </div>
                 <div className="row">
                     <label
@@ -38,12 +43,17 @@ function LoginForm (props) {
                         type = "password"
                         className = "form-control"
                         id = "password"
-                        placeholder = "password"
+                        placeholder = "Enter password"
                         value = {props.state.password}
                         onChange = {props.onChange }
                         ref={props.passwordreference}
                         required
                     />
+                    {!(props.state.clientError === null)
+                        ? <div className="errors-class">
+                            {props.state.clientError.passwordError}
+                        </div>
+                        : <div/>}
                 </div>
                 <div className="row login-buttons">
                     <button
@@ -51,12 +61,6 @@ function LoginForm (props) {
                         className = "btn btn-primary col-4">
                             Log in
                     </button>
-                    {/* <button
-                        type = "button"
-                        onClick = {props.handleSignin}
-                        className = "btn btn-primary col-3">
-                            Sign in
-                    </button> */}
                 </div>
                 <div className="row">
                     <a className="row signin-link" onClick= {props.handleSignin}>Create account</a>

@@ -1,15 +1,10 @@
 import homeImg from '../asserts/images/homeImg.jpg'
 import React from 'react'
+
 function SignUpForm (props) {
-    // console.log(!(props.state.error.invalidMobileNumber === undefined))
-    // console.log(props.state.error.userExists.errorMessage)
-    // console.log(Object.keys(props.state.error).length)
-    // let error
-    // (Object.keys(props.state.error).length) ? error = true : error = false
     return (
         <div className = "container-flex signIn-wrapper ">
-            <form onSubmit={props.handleOnClick} className="signIn-form">
-
+            <form onSubmit={props.handleOnSubmit} className="signIn-form">
                 <div className="col-6">
                     <label
                         className="form-label signIn-label"
@@ -22,8 +17,14 @@ function SignUpForm (props) {
                         className = "form-control"
                         value = {props.state.name}
                         onChange = {props.handleOnChange}
+                        placeholder= "Enter Full Name"
                         required
                     />
+                    {!(props.state.error.nameTaken === undefined)
+                        ? <div className="errors-class">
+                            {props.state.error.nameTaken.errorMessage}
+                        </div>
+                        : <div></div>}
                 </div>
                 <div className="col-6">
                     <label className="form-label signIn-label" htmlFor = "email">Email</label>
@@ -33,9 +34,15 @@ function SignUpForm (props) {
                         className = "form-control"
                         value = {props.state.email}
                         onChange={props.handleOnChange}
+                        placeholder= "Enter Email"
                         required
                     />
-                    {!(props.state.error.userExists === undefined)
+                    {(props.state.clientErrors !== null)
+                        ? <div className="errors-class">
+                            {props.state.clientErrors.emailError}
+                        </div>
+                        : <div></div>}
+                    {(props.state.error.userExists !== undefined)
                         ? <div className="errors-class">
                             {props.state.error.userExists.errorMessage}
                         </div>
@@ -55,14 +62,14 @@ function SignUpForm (props) {
                             className = "form-control"
                             value = {props.state.newPassword}
                             onChange={props.handleOnChange}
+                            placeholder= "Enter New Password"
                             required
                         />
-                        {!(props.state.error.passwordLength === undefined)
+                        {(props.state.clientErrors !== null)
                             ? <div className="errors-class">
-                                {props.state.error.passwordLength.errorMessage}
+                                {props.state.clientErrors.passwordError}
                             </div>
                             : <div></div>}
-
                     </div>
                     <div className="col-6">
                         <label
@@ -77,15 +84,15 @@ function SignUpForm (props) {
                             className = "form-control"
                             value = {props.state.newPasswordVerify}
                             onChange={props.handleOnChange}
+                            placeholder= "Re-enter New Password"
                             required
                         />
-                        {!(props.state.error.passwordError === undefined)
+                        {(props.state.error.userExists !== null)
                             ? <div className="errors-class">
-                                {props.state.error.passwordError.errorMessage}
+                                {props.state.clientErrors.passwordVerifyError}
                             </div>
                             : <div></div>}
                     </div>
-
                 </div>
                 <div className="col-6">
                     <label
@@ -100,11 +107,12 @@ function SignUpForm (props) {
                         className = "form-control"
                         value = {props.state.mobileNumber}
                         onChange = {props.handleOnChange}
+                        placeholder= "Enter Phone Number"
                         required
                     />
-                    {!(props.state.error.invalidMobileNumber === undefined)
+                    {(props.state.error.userExists !== null)
                         ? <div className="errors-class">
-                            {props.state.error.invalidMobileNumber.errorMessage}
+                            {props.state.clientErrors.mobileNumberError}
                         </div>
                         : <div></div>}
                 </div>
@@ -122,8 +130,14 @@ function SignUpForm (props) {
                             className = "form-control"
                             value = {props.state.idProofNumber}
                             onChange={props.handleOnChange}
+                            placeholder= "Aadhar Card Number"
                             required
                         />
+                        {(props.state.error.userExists !== null)
+                            ? <div className="errors-class">
+                                {props.state.clientErrors.idProofNumberError}
+                            </div>
+                            : <div></div>}
                     </div>
                     <div className="col-6">
                         <label className="form-label signIn-label" htmlFor = "age">Age</label>
@@ -133,21 +147,28 @@ function SignUpForm (props) {
                             className = "form-control"
                             value = {props.state.age}
                             onChange = {props.handleOnChange}
+                            placeholder= "Enter Age"
+                            min = "15"
+                            max = "90"
                             required
                         />
+                        {(props.state.error.userExists !== null)
+                            ? <div className="errors-class">
+                                {props.state.clientErrors.ageError}
+                            </div>
+                            : <div></div>}
                     </div>
                 </div>
                 <div className="row login-buttons">
                     <button
-                        type = "button"
-                        onClick = {props.handleOnClick}
+                        type = "submit "
                         className = "btn btn-primary col-3">
                             Sign in
                     </button>
 
                 </div>
                 <div className="row">
-                    <a className="row signin-link" onClick= {props.handleLogin}>Login insted</a>
+                    <a className="row signin-link" onClick= {props.handleLogin}>Login instead</a>
                 </div>
             </form>
             <img src={homeImg} alt="homeImage" className="loginImage-wrapper" />

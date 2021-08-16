@@ -8,9 +8,9 @@ const HotelsSchema = mongoose.Schema({
     phone : Number,
     longitude : Number,
     lattitude : Number,
-    singleRoom : Number,
-    doubleRoom : Number,
-    suitRoom : Number,
+    Single : Number,
+    Double : Number,
+    Suit : Number,
     description : String,
 });
 

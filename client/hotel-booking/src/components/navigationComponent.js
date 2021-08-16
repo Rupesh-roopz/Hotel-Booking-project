@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import React from 'react'
 
 function NavigationComponent (props) {
     return (
@@ -11,10 +10,14 @@ function NavigationComponent (props) {
                             <Link className="nav-link active" aria-current="page" to="/main">Home</Link>
                         </li>
                         <li className="nav-item">
-                            {/* <a className="nav-link" href="#">Features</a> */}
+                            {(props.state.isAdmin)
+                                ? <Link className="nav-link active" aria-current="page" to="/hotelsList">Hotels List</Link>
+                                : <div/>}
                         </li>
                         <li className="nav-item">
-                            {/* <a className="nav-link" href="#">Pricing</a> */}
+                            {(props.state.isAdmin)
+                                ? <Link className="nav-link active" aria-current="page" to="/admin">Add Hotel</Link>
+                                : <div/>}
                         </li>
                     </ul>
                     <div className="profileWrapper">
@@ -23,12 +26,12 @@ function NavigationComponent (props) {
                         account_circle
                             </i>
                             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a className="dropdown-item" >Profile</a></li>
-                                <li><a className="dropdown-item" >Bookings</a></li>
+                                <li><a className="dropdown-item" onClick={props.myProfile}>Profile</a></li>
+                                <li><a className="dropdown-item" onClick={props.bookings}>Bookings</a></li>
                                 <li><a className="dropdown-item" onClick={props.logout}>Logout</a></li>
                             </ul>
                         </div>
-                        Welcome {props.userData.data.name}
+                        Welcome {props.state.userName}
                     </div>
                 </div>
             </div>

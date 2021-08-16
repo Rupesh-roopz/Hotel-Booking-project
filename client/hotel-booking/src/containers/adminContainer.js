@@ -2,9 +2,9 @@ import React from 'react'
 import Admin from '../components/adminComponent'
 import { withRouter } from 'react-router-dom'
 import NavigationContainer from './navigationContainer'
-// import hotel from '../Resources/adminResources'
-// import axios from 'axios'
+import { hotelValidation } from '../utils/adminUtils'
 import api from '../Resources/index'
+
 class AdminPage extends React.Component {
     constructor (props) {
         super(props)
@@ -14,12 +14,13 @@ class AdminPage extends React.Component {
             roomsAvailable : '',
             address : '',
             phone : '',
-            longitude : '',
-            lattitude : '',
-            singleRoom : '',
-            doubleRoom : '',
-            suitRoom : '',
-            description : ''
+            Single : '',
+            Double : '',
+            Suit : '',
+            description : '',
+            error : {},
+            serverError : {},
+            isSucessfull : false
         }
     }
 
@@ -33,19 +34,42 @@ class AdminPage extends React.Component {
 
     handleOnChange = (event) => {
         this.setState({
-            [event.target.id] : event.target.value
+            [event.target.id] : event.target.value,
+            isSucessfull : false,
+            error : {},
+            serverError : {}
         })
     }
 
-    handleOnClick = (event) => {
+    hotelValidation = () => {
+        this.setState({ error : hotelValidation(this.state) })
+        if (Object.keys(hotelValidation(this.state)).length === 0) {
+            api.postHotelDetails(this.state)
+                .then(res => {
+                    this.setState({ isSucessfull : true })
+                    this.props.history.push('/hotelsList')
+                })
+                .catch((e) => {
+                    this.setState({ serverError : e.response.data.error })
+                    if (e.response.status === 403) { this.props.history.push('/forbidden') }
+                })
+        }
+        this.dismissError()
+    }
+
+    dismissError = async () => {
+        await setTimeout(() => {
+            this.setState({
+                isSucessfull : false,
+                error : {},
+                serverError : {}
+            })
+        }, 5000)
+    }
+
+    handleOnSubmit = (event) => {
         event.preventDefault()
-        api.postHotelDetails(this.state)
-            .then(res => {
-                console.log(res)
-            })
-            .catch((e) => {
-                if (e.response.status === 403) { this.props.history.push('/') }
-            })
+        this.hotelValidation()
     }
 
     render () {
@@ -55,7 +79,7 @@ class AdminPage extends React.Component {
                 <Admin
                     state = {this.state}
                     onChange = {this.handleOnChange}
-                    onClick = {this.handleOnClick}
+                    onSubmit = {this.handleOnSubmit}
                     showHotelsList = {this.showHotelsList}
                     showHome = {this.showHome}/>
             </div>

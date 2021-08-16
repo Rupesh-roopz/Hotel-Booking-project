@@ -1,6 +1,5 @@
 import React from 'react'
 import hotelImg from '../asserts/images/hotelImg.jpg'
-import '../asserts/css/hotelPreviewComponent.css'
 
 function HotelPreviewComponent (props) {
     return (
@@ -40,13 +39,13 @@ function HotelPreviewComponent (props) {
                             </div>
                             <div className="row">
                                 <div className="col-4">
-                                    <p>Single Room : {props.hotel.singleRoom}/-</p>
+                                    <p>Single Room : {props.hotel.Single}/-</p>
                                 </div>
                                 <div className="col-4">
-                                    <p>Double Room : {props.hotel.doubleRoom}/-</p>
+                                    <p>Double Room : {props.hotel.Double}/-</p>
                                 </div>
                                 <div className="col-4">
-                                    <p>Suit Room : {props.hotel.suitRoom}/-</p>
+                                    <p>Suit Room : {props.hotel.Suit}/-</p>
                                 </div>
                             </div>
                             <div className="row">
@@ -63,11 +62,9 @@ function HotelPreviewComponent (props) {
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-
     )
 }
 

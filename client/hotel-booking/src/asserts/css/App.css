@@ -44,14 +44,18 @@ html {
     box-shadow:10px 10px 50px lightskyblue;  
 }
 
+.nav-wrapper{
+    margin: 1.25%;
+    box-shadow:10px 10px 50px lightskyblue;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 #priceID{
     font-size: 1.25em;
     color :rgb(23, 95, 202);
     font-weight:600 ;
     
-}
-img {
-    cursor:pointer;
 }
 
 .profileIcon{
@@ -144,6 +148,7 @@ img {
 }
 
 .login-label{
+    padding-left: 0px;
     font-size: 1.5rem;
     color: white;
 }
@@ -162,6 +167,7 @@ img {
 }
 
 .signIn-label{
+    padding-left: 0px;
     color: white;
 }
 
@@ -172,7 +178,7 @@ img {
 }
 .errors-class{
     font-size: 1rem;
-    background-color: red;
+    background-color: rgb(255, 0, 0);
     color:white;
     font-weight: 500;
 }
@@ -186,4 +192,208 @@ img {
 .signin-link:hover {
     color : white;
     font-size: large;
+}
+
+.profile-wrapper{
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 1;
+    position : absolute;
+    color: white;
+    font-size :1.2rem;
+    box-shadow:10px 10px 50px rgb(184, 150, 101); 
+    border-radius: 20px;
+    font-weight: 400;
+}
+
+.profile-wrapperOutside{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.profileImage-wrapper{
+    height: 90vh;
+    width: 100%;
+    filter : blur(4px)
+}
+
+.bookedHotel-label{
+    padding : 10px;
+    width : 200px;
+}
+
+.bookedHotel-button{
+    width: 150px ;
+}
+
+.bookedHotel-button:hover{
+    background-color: green;
+}
+
+.payment-font{
+    color: green;
+}
+.card-Wrapper { 
+    border : 1px solid black;
+    padding: 10PX;
+    width : 300px;
+}
+.insideCard{
+    display: flex;
+}
+
+.insideCard-cvv {
+    width: 100px;
+}
+
+.insideCard-expDate {
+    width: 60px;
+    margin: 5px;
+}
+
+.payment-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.payment-WrapperInside{
+    border : 2px solid green;
+    padding: 50px;
+    margin: 20px;
+}
+
+.payment-button-wrapper{
+margin-top: 1rem ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paymentSuccess-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+}
+
+.payment-success{
+    height: 90vh;
+    width: 100%;
+    background-color: khaki;
+}
+
+.paymentSuccess-insideWrapper{
+    margin-top: 100px;
+    padding: 10px;
+    background-color: rgb(88, 168, 88);
+    border: 1px solid green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.paymentSuccess-font{
+    color: honeydew;
+    font-size: large;
+}
+
+.pagination{
+    margin: 0px;
+}
+
+.bookedHotel-wrapper{
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    font-size :1.2rem;
+    box-shadow:10px 10px 50px lightskyblue;  
+    border-radius: 20px;
+    font-weight: 400;
+    padding: 20px;
+}
+
+.bookedHotel-wrapperOutside{
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.profileImage-wrapper{
+    height: 90vh;
+    width: 100%;
+    filter : blur(4px)
+}
+
+.bookingButton-wrapper{
+    display: flex;
+    justify-content: center;
+    padding: 20px
+}
+
+.displayImage{
+    cursor: pointer;
+}
+
+.hotelSucess-bar{
+    display: flex;
+    justify-content: center;
+}
+
+.hotelSucess-message{
+    font-size: large;
+    font-weight: 700;
+    color: green;
+    align-items: center;
+}
+
+.hotelAdd-header{
+    padding: 20px;
+    text-align: center;
+    color: green;
+}
+
+.hotelAdd-buttonWrapper{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.dropdown-item{
+    cursor: pointer;
+}
+
+.dropdown-item:hover{
+    background-color: lightskyblue;
+}
+
+.paginationList{
+    cursor: pointer;
+}
+
+.forbidden-wrapper{
+    height: 100vh;
+    width: 100%;
+    background-color: grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.forbidden-header{
+    color: rgb(185, 12, 12);
+    font-weight: 900;
+    font-size: 5rem;
+}
+
+.forbidden-text{
+    color: white;
 }

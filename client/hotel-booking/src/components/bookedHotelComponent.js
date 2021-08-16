@@ -3,7 +3,7 @@ function BookedHotelComponent (props) {
         <div className = "container-fluid ">
             <div className = "row bookedHotel-name-Wrapper hotelNameFont">{props.state.hotelData.hotelName}</div>
             <div className = "col-4 bookedHotel-form-Wrapper " >
-                <form onSubmit = {props.onConfirmBooking} className = "bookedHotel-Form">
+                <form onSubmit = {props.onSubmit} className = "bookedHotel-Form">
                     <div className = "container-fluid">
                         <div className = "row inputContainer">
                             <div className = "col">
@@ -34,6 +34,7 @@ function BookedHotelComponent (props) {
                                     className = "form-control"
                                     onChange = {props.onChange}
                                     value = {props.state.checkInDate}
+                                    min = {props.state.currentDate}
                                     required
                                 />
                             </div>
@@ -51,6 +52,7 @@ function BookedHotelComponent (props) {
                                     className = "form-control"
                                     onChange = {props.onChange}
                                     value = {props.state.checkOutDate}
+                                    min = {props.state.checkInDate}
                                     required
                                 />
                             </div>
@@ -67,21 +69,19 @@ function BookedHotelComponent (props) {
                                     value = {props.state.roomType}
                                     required
                                 >   <option value = "">room type</option>
-                                    <option value = "Single Room">Single Room</option>
-                                    <option value = "Double Room">Double Room</option>
-                                    <option value = "Triple Room">Triple Room</option>
-                                    <option value = "Suit Room">Suit Room</option>
+                                    <option value = "Single">Single Room</option>
+                                    <option value = "Double">Double Room</option>
+                                    <option value = "Suit">Suit Room</option>
                                 </select>
                             </div>
                         </div>
                         <div className = "row inputContainer">
                             <button
                                 type = "submit"
-                                className = "btn btn-primary col-4"
-                            >Confirm Booking</button>
+                                className = "btn btn-primary col"
+                            >View Booking Details</button>
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>

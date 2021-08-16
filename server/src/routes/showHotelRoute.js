@@ -4,9 +4,8 @@ const hotel = require('../controller/showHotelController');
 const authenticateToken = require('../controller/auth');
 
 router
-    .route('/hotelPreview')
+    .route('/preview')
     .post(authenticateToken, (req, res) => {
-        console.log(req.body.data);
         hotel.selectedHotel(req, res);
     })
     .get(authenticateToken, (req, res) => {

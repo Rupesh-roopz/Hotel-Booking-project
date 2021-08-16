@@ -10,7 +10,7 @@ function authenticateToken(req, res, next) {
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, res) => {
         if (err) {
             console.log(err);
-            return res.sendStatus(403);
+            return res.sendStatus(401);
         };
         next();
     });
