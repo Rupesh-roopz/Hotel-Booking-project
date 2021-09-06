@@ -1,7 +1,8 @@
 import React from 'react'
-import BookingComponent from '../components/bookingComponent'
-import NavigationContainer from './navigationContainer'
+import BookingComponent from '../components/BookingComponent'
+import NavigationContainer from './NavigationContainer'
 import api from '../Resources/index'
+import http from '../constants/http'
 
 class BookingContainer extends React.Component {
     constructor (props) {
@@ -19,7 +20,7 @@ class BookingContainer extends React.Component {
                 })
             })
             .catch((e) => {
-                if (e.response.status === 403) { this.props.history.push('/forbidden') }
+                if (e.response.status === http.Unauthorized) { this.props.history.push('/sessionExpired') }
             })
     }
 

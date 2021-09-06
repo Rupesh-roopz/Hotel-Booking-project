@@ -1,9 +1,8 @@
-/* eslint-disable no-useless-escape */
 import React from 'react'
-import { withRouter } from 'react-router-dom'
-import LoginForm from '../components/loginFormComponent'
+import { withRouter, Redirect } from 'react-router-dom'
+import LoginForm from '../components/LoginFormComponent'
 import api from '../Resources/index'
-import { loginValidation } from '../utils/loginUtils'
+import { loginValidation } from '../validations/LoginValidation'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -13,10 +12,16 @@ class Login extends React.Component {
         this.inputRef = React.createRef()
         this.passwordRef = React.createRef()
         this.state = {
-            email : 'rupesh123@gmail.com',
-            password : '123456',
+            email : 'rupesh.admin@gmail.com',
+            password : 'rupeshadmin',
             serverError : '',
             clientError : ''
+        }
+    }
+
+    componentDidMount () {
+        if (this.props.history.action === 'POP' && sessionStorage.getItem('token')) {
+            this.props.history.push('/main')
         }
     }
 
@@ -45,13 +50,12 @@ class Login extends React.Component {
         if (Object.keys(loginValidation(this.state)).length === 0) {
             api.postUserData(this.state)
                 .then(res => {
-                    sessionStorage.setItem('token', res.data.accessToken)
+                    const token = res.data.accessToken
+                    sessionStorage.setItem('token', token)
                     sessionStorage.setItem('userName', res.data.userName)
                     sessionStorage.setItem('userId', res.data.userid)
-                    console.log(res.data)
-                    res.data.isAdmin
-                        ? this.props.history.push('/hotelsList')
-                        : this.props.history.push('/main')
+                    sessionStorage.setItem('isAdmin', res.data.isAdmin)
+                    this.props.history.push('/main')
                 })
                 .catch(e => {
                     this.setState({
@@ -61,16 +65,6 @@ class Login extends React.Component {
                     this.passwordRef.current.style.border = '2px solid Red'
                 })
         }
-        this.dismissError()
-    }
-
-    dismissError = async () => {
-        await setTimeout(() => {
-            this.setState({
-                serverError : '',
-                clientError : ''
-            })
-        }, 5000)
     }
 
     handleOnSubmit = (event) => {
@@ -79,13 +73,16 @@ class Login extends React.Component {
     }
 
     handleSignin = () => {
+        console.log(document.cookie)
         this.props.history.push('/signup')
     }
 
     render () {
         toast.configure()
-        return (
-            <LoginForm
+        if (document.cookie) {
+            return <Redirect to="/main" />
+        } else {
+            return <LoginForm
                 onChange = {this.handleOnChange}
                 onSubmit = {this.handleOnSubmit}
                 state = {this.state}
@@ -93,7 +90,7 @@ class Login extends React.Component {
                 passwordreference = {this.passwordRef}
                 handleSignin = {this.handleSignin}
             />
-        )
+        }
     }
 }
 

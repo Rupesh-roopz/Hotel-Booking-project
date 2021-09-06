@@ -1,7 +1,9 @@
 import React from 'react'
-import ProfileComponent from '../components/profileComponent'
+import ProfileComponent from '../components/ProfileComponent'
 import api from '../Resources/index'
-import NavigationContainer from './navigationContainer'
+import NavigationContainer from './NavigationContainer'
+import http from '../constants/http'
+
 class ProfileContainer extends React.Component {
     constructor (props) {
         super(props)
@@ -17,13 +19,12 @@ class ProfileContainer extends React.Component {
         })
         api.getUserData()
             .then(res => {
-                console.log(res.data)
                 this.setState({
                     profile : res.data.user
                 })
             })
-            .catch((e) => {
-                if (e.response.status === 403) { this.props.history.push('/forbidden') }
+            .catch(e => {
+                if (e.response.status === http.Unauthorized) { this.props.history.push('/sessionExpired') }
             })
     }
 

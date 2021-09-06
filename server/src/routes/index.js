@@ -1,8 +1,8 @@
 const express = require( 'express');
 const app = express();
 
-const users = require('./usersRoute');
-const hotels = require('./hotelsRoute');
+const users = require('./userRoute');
+const hotels = require('./hotelRoute');
 const bookedHotel = require('./bookedHotelRoute');
 const showHotel = require('./showHotelRoute');
 

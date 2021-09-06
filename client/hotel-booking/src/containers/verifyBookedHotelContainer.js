@@ -1,7 +1,6 @@
 import React from 'react'
-import VerifyBookedHotelComponent from '../components/verifyBookedHotelComponent'
-import NavigationContainer from './navigationContainer'
-import api from '../Resources/index'
+import VerifyBookedHotelComponent from '../components/VerifyBookedHotelComponent'
+import NavigationContainer from './NavigationContainer'
 import { withRouter } from 'react-router-dom'
 
 class VerifyBookedHotelContainer extends React.Component {
@@ -17,15 +16,9 @@ class VerifyBookedHotelContainer extends React.Component {
     }
 
     getHotelData = () => {
-        api.getSelectedHotelData()
-            .then((res) => {
-                console.log(res.data)
-                this.setState({ bookedHotelData : res.data })
-            })
-            .catch((e) => {
-                console.log(e.response)
-                if (e.response.status === 403) { this.props.history.push('/forbidden') }
-            })
+        const myData = JSON.parse(sessionStorage.getItem('data'))
+        console.log(myData)
+        this.setState({ bookedHotelData : myData })
     }
 
     handleOnClick = () => {

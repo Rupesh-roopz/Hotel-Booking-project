@@ -1,5 +1,4 @@
 function PaymentComponent (props) {
-    console.log(props)
     return (
         <div className="container-fluid">
             <div className="container">

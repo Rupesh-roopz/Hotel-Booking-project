@@ -1,5 +1,6 @@
 import React from 'react'
-import HomeComponent from '../components/homeComponent'
+import HomeComponent from '../components/HomeComponent'
+import { Redirect } from 'react-router-dom'
 
 class Home extends React.Component {
     handleLogin = () => {
@@ -11,9 +12,13 @@ class Home extends React.Component {
     }
 
     render () {
-        return <HomeComponent
-            handleLogin = {this.handleLogin}
-            handleSignin = {this.handleSignin}/>
+        if (document.cookie) {
+            return <Redirect to="/main" />
+        } else {
+            return <HomeComponent
+                handleLogin = {this.handleLogin}
+                handleSignin = {this.handleSignin}/>
+        }
     }
 }
 

@@ -1,8 +1,9 @@
 import React from 'react'
-import HotelPreviewComponent from '../components/hotelPreviewComponent'
+import HotelPreviewComponent from '../components/HotelPreviewComponent'
 import { withRouter } from 'react-router-dom'
-import NavigationContainer from './navigationContainer'
+import NavigationContainer from './NavigationContainer'
 import api from '../Resources/index'
+import http from '../constants/http'
 
 class HotelPreviewContainer extends React.Component {
     constructor (props) {
@@ -16,14 +17,13 @@ class HotelPreviewContainer extends React.Component {
         this.getSelectedHotelDetails()
     }
 
-    getSelectedHotelDetails = () => {
-        api.getHotelData()
+    getSelectedHotelDetails = async () => {
+        await api.getHotelData()
             .then((res) => {
-                console.log('hotel', res.data)
                 this.setState({ hotelData : res.data })
             })
-            .catch((e) => {
-                if (e.response.status === 403) { this.props.history.push('/forbidden') }
+            .catch(e => {
+                if (e.response.status === http.Unauthorized) { this.props.history.push('/sessionExpired') }
             })
     }
 

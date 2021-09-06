@@ -1,5 +1,4 @@
 function VerifyBookedHotelComponent (props) {
-    console.log(props)
     return (
         <div className="container-fluid bookedHotel-wrapperOutside">
             <div className="bookedHotel-wrapper">

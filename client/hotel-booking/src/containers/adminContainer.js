@@ -1,9 +1,10 @@
 import React from 'react'
-import Admin from '../components/adminComponent'
+import Admin from '../components/AdminComponent'
 import { withRouter } from 'react-router-dom'
-import NavigationContainer from './navigationContainer'
-import { hotelValidation } from '../utils/adminUtils'
+import NavigationContainer from './NavigationContainer'
+import { hotelValidation } from '../validations/AdminValidation'
 import api from '../Resources/index'
+import http from '../constants/http'
 
 class AdminPage extends React.Component {
     constructor (props) {
@@ -24,11 +25,11 @@ class AdminPage extends React.Component {
         }
     }
 
-    showHotelsList=() => {
+    showHotelsList = () => {
         this.props.history.push('/hotelsList')
     }
 
-    showHome =() => {
+    showHome = () => {
         this.props.history.push('/main')
     }
 
@@ -51,20 +52,10 @@ class AdminPage extends React.Component {
                 })
                 .catch((e) => {
                     this.setState({ serverError : e.response.data.error })
-                    if (e.response.status === 403) { this.props.history.push('/forbidden') }
+                    if (e.response.status === http.Forbidden) { this.props.history.push('/forbidden') }
+                    if (e.response.status === http.Unauthorized) { this.props.history.push('/sessionExpired') }
                 })
         }
-        this.dismissError()
-    }
-
-    dismissError = async () => {
-        await setTimeout(() => {
-            this.setState({
-                isSucessfull : false,
-                error : {},
-                serverError : {}
-            })
-        }, 5000)
     }
 
     handleOnSubmit = (event) => {
@@ -81,9 +72,9 @@ class AdminPage extends React.Component {
                     onChange = {this.handleOnChange}
                     onSubmit = {this.handleOnSubmit}
                     showHotelsList = {this.showHotelsList}
-                    showHome = {this.showHome}/>
+                    showHome = {this.showHome}
+                />
             </div>
-
         )
     }
 }

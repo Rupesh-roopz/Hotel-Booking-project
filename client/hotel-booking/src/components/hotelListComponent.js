@@ -2,21 +2,21 @@ import React from 'react'
 
 function HotelList (props) {
     let serilNo = 1
-    console.log(props)
     return (
         <div className = "container-flex">
             <table className = "table table-striped table-hover table-bordered table-sm">
+                <caption>Available Hotels</caption>
                 <thead>
                     <tr>
                         <th scope = "col">S. No</th>
                         <th scope = "col">Hotel Name</th>
-                        <th scope = "col">Total Rooms</th>
+                        <th scope = "col ">Total Rooms</th>
                         <th scope = "col">Available Rooms</th>
                         <th scope = "col">Address</th>
-                        <th scope = "col">phone</th>
-                        <th scope = "col">single Room Price</th>
-                        <th scope = "col">double Room Price</th>
-                        <th scope = "col">suit Room Price</th>
+                        <th scope = "col">Phone</th>
+                        <th scope = "col">Single Room Price</th>
+                        <th scope = "col">Double Room Price</th>
+                        <th scope = "col">Suit Room Price</th>
                         <th scope = "col">Description</th>
                     </tr>
                 </thead>

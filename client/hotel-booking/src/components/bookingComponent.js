@@ -1,7 +1,7 @@
 function BookingComponent (props) {
     let serilNo = 1
     if (!(Object.keys(props.booking).length)) {
-        return <h1>loading</h1>
+        return <h1>please book a hotel</h1>
     } else {
         return (
             <div className = "container-flex">

@@ -9,7 +9,7 @@ function SignUpForm (props) {
                     <label
                         className="form-label signIn-label"
                         htmlFor = "fullName">
-                            Full Name
+                            Full Name*
                     </label>
                     <input
                         id = "name"
@@ -20,14 +20,14 @@ function SignUpForm (props) {
                         placeholder= "Enter Full Name"
                         required
                     />
-                    {!(props.state.error.nameTaken === undefined)
+                    {(props.state.error.nameTaken !== undefined)
                         ? <div className="errors-class">
                             {props.state.error.nameTaken.errorMessage}
                         </div>
                         : <div></div>}
                 </div>
                 <div className="col-6">
-                    <label className="form-label signIn-label" htmlFor = "email">Email</label>
+                    <label className="form-label signIn-label" htmlFor = "email">Email*</label>
                     <input
                         id = "email"
                         type = "text"
@@ -54,7 +54,7 @@ function SignUpForm (props) {
                             className = "form-label signIn-label"
                             htmlFor = "newPassword"
                         >
-                            New Password
+                            New Password*
                         </label>
                         <input
                             id = "newPassword"
@@ -70,13 +70,18 @@ function SignUpForm (props) {
                                 {props.state.clientErrors.passwordError}
                             </div>
                             : <div></div>}
+                        {(props.state.error.passwordError !== undefined)
+                            ? <div className="errors-class">
+                                {props.state.error.passwordError.errorMessage}
+                            </div>
+                            : <div></div>}
                     </div>
                     <div className="col-6">
                         <label
                             className="form-label signIn-label"
                             htmlFor = "newPasswordVerify"
                         >
-                        Re-Enter Password
+                        Re-Enter Password*
                         </label>
                         <input
                             id = "newPasswordVerify"
@@ -87,7 +92,7 @@ function SignUpForm (props) {
                             placeholder= "Re-enter New Password"
                             required
                         />
-                        {(props.state.error.userExists !== null)
+                        {(props.state.clientErrors !== null)
                             ? <div className="errors-class">
                                 {props.state.clientErrors.passwordVerifyError}
                             </div>
@@ -99,7 +104,7 @@ function SignUpForm (props) {
                         className="form-label signIn-label"
                         htmlFor = "phoneNumber"
                     >
-                        Phone Number
+                        Phone Number*
                     </label>
                     <input
                         id = "mobileNumber"
@@ -110,7 +115,7 @@ function SignUpForm (props) {
                         placeholder= "Enter Phone Number"
                         required
                     />
-                    {(props.state.error.userExists !== null)
+                    {(props.state.clientErrors !== null)
                         ? <div className="errors-class">
                             {props.state.clientErrors.mobileNumberError}
                         </div>
@@ -122,7 +127,7 @@ function SignUpForm (props) {
                             className="form-label signIn-label"
                             htmlFor = "idProofNumber"
                         >
-                        ID Proof Number
+                        ID Proof Number*
                         </label>
                         <input
                             id = "idProofNumber"
@@ -133,14 +138,14 @@ function SignUpForm (props) {
                             placeholder= "Aadhar Card Number"
                             required
                         />
-                        {(props.state.error.userExists !== null)
+                        {(props.state.clientErrors !== null)
                             ? <div className="errors-class">
                                 {props.state.clientErrors.idProofNumberError}
                             </div>
                             : <div></div>}
                     </div>
                     <div className="col-6">
-                        <label className="form-label signIn-label" htmlFor = "age">Age</label>
+                        <label className="form-label signIn-label" htmlFor = "age">Age*</label>
                         <input
                             id = "age"
                             type = "number"
@@ -152,7 +157,7 @@ function SignUpForm (props) {
                             max = "90"
                             required
                         />
-                        {(props.state.error.userExists !== null)
+                        {(props.state.clientErrors !== null)
                             ? <div className="errors-class">
                                 {props.state.clientErrors.ageError}
                             </div>

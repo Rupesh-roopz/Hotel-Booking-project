@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const hotel = require('../controller/bookedHotelController');
-const authenticateToken = require('../controller/auth');
+const authenticateToken = require('../middleware/auth');
 
 router
     .route('/add')

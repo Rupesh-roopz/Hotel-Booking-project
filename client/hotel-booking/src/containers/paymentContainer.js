@@ -1,9 +1,11 @@
 import React from 'react'
-import PaymentComponent from '../components/paymentComponent'
-import NavigationContainer from './navigationContainer'
-import PaymentSucessComponent from '../components/paymentSucessComponent'
+import PaymentComponent from '../components/PaymentComponent'
+import NavigationContainer from './NavigationContainer'
+import PaymentSucessComponent from '../components/PaymentSucessComponent'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import api from '../Resources/index'
+import http from '../constants/http'
 
 class PaymentContainer extends React.Component {
     constructor (props) {
@@ -14,6 +16,12 @@ class PaymentContainer extends React.Component {
         }
     }
 
+    componentDidMount () {
+        if (this.props.history.action === 'POP') {
+            this.props.history.push('/main')
+        }
+    }
+
     handleOnChange = (event) => {
         this.setState({
             [event.target.name] : event.target.value
@@ -21,10 +29,19 @@ class PaymentContainer extends React.Component {
     }
 
     handleOnClick = () => {
-        this.setState({
-            isPayment : true
-        })
-        toast.success('Payment Successfull')
+        const bookedHotel = JSON.parse(sessionStorage.getItem('data'))
+        api.postBookedHotelData(bookedHotel)
+            .then((res) => {
+                this.setState({
+                    isPayment : true
+                })
+                toast.success('Payment Successfull')
+                sessionStorage.removeItem('data')
+            })
+            .catch((e) => {
+                console.log(e.response)
+                if (e.response.status === http.Unauthorized) { this.props.history.push('/sessionExpired') }
+            })
     }
 
     render () {

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 
 function NavigationComponent (props) {
+    const name = sessionStorage.getItem('userName')
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <div className="container-fluid">
@@ -31,7 +32,7 @@ function NavigationComponent (props) {
                                 <li><a className="dropdown-item" onClick={props.logout}>Logout</a></li>
                             </ul>
                         </div>
-                        Welcome {props.state.userName}
+                        Welcome {name}
                     </div>
                 </div>
             </div>

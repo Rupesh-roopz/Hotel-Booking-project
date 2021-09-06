@@ -1,9 +1,10 @@
 import React from 'react'
-import HotelsFeedComponent from '../components/hotelsFeedComponent'
+import HotelsFeedComponent from '../components/HotelsFeedComponent'
 import { withRouter } from 'react-router-dom'
-import NavigationContainer from './navigationContainer'
-import Pagination from '../components/paginationComponent'
+import NavigationContainer from './NavigationContainer'
+import Pagination from '../components/PaginationComponent'
 import api from '../Resources/index'
+import http from '../constants/http'
 
 class HotelsFeedContainer extends React.Component {
     constructor (props) {
@@ -12,11 +13,13 @@ class HotelsFeedContainer extends React.Component {
             posts : [],
             currentPage : 1,
             postsPerPage : 3
-
         }
     }
 
     componentDidMount () {
+        if (this.props.history.action === 'POP' && sessionStorage.getItem('token')) {
+            this.props.history.push('/main')
+        }
         this.getData()
     }
 
@@ -26,22 +29,23 @@ class HotelsFeedContainer extends React.Component {
                 this.setState({ posts : res.data })
             })
             .catch((e) => {
-                if (e.response.status === 403) { this.props.history.push('/forbidden') }
+                if (e.response.status === http.Forbidden) { this.props.history.push('/forbidden') }
+                if (e.response.status === http.Unauthorized) { this.props.history.push('/sessionExpired') }
             })
     }
 
-    hotelPreview = (hotel) => {
+    hotelPreview = async (hotel) => {
         const selectedHotel = {
             hotel : hotel
         }
-        api.postHotelData(selectedHotel)
+        await api.postHotelData(selectedHotel)
             .then(res => {
-                console.log(res.data)
                 sessionStorage.setItem('hotelId', res.data.hotelID)
                 this.props.history.push('/hotelPreview')
             })
             .catch((e) => {
-                if (e.response.status === 403) { this.props.history.push('/forbidden') }
+                if (e.response.status === http.Forbidden) { this.props.history.push('/forbidden') }
+                if (e.response.status === http.Unauthorized) { this.props.history.push('/sessionExpired') }
             })
     }
 

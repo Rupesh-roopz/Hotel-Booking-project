@@ -1,7 +1,7 @@
 import React from 'react'
-import SignUpForm from '../components/signupFormComponent'
-import { withRouter } from 'react-router-dom'
-import { signUpValidation } from '../utils/signupUtils'
+import SignUpForm from '../components/SignupFormComponent'
+import { withRouter, Redirect } from 'react-router-dom'
+import { signUpValidation } from '../validations/SigninValidation'
 import api from '../Resources/index'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -39,19 +39,10 @@ class SignUp extends React.Component {
                     this.props.history.push('/login')
                 })
                 .catch((e) => {
+                    console.log(e.response)
                     this.setState({ error : e.response.data.error })
                 })
         }
-        this.dismissError()
-    }
-
-    dismissError = async () => {
-        await setTimeout(() => {
-            this.setState({
-                error : {},
-                clientErrors : {}
-            })
-        }, 5000)
     }
 
     handleOnSubmit=(event) => {
@@ -64,12 +55,16 @@ class SignUp extends React.Component {
     }
 
     render () {
-        return <SignUpForm
-            state = {this.state}
-            handleOnChange = {this.handleOnChange}
-            handleOnSubmit = {this.handleOnSubmit}
-            handleLogin = {this.handleLogin}
-        />
+        if (document.cookie) {
+            return <Redirect to="/main" />
+        } else {
+            return <SignUpForm
+                state = {this.state}
+                handleOnChange = {this.handleOnChange}
+                handleOnSubmit = {this.handleOnSubmit}
+                handleLogin = {this.handleLogin}
+            />
+        }
     }
 }
 

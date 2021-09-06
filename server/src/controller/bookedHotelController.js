@@ -1,9 +1,10 @@
 const BookedHotel = require('../models/bookedHotels');
-const hotel = require('../utils/bookedHotelUtil');
+const http = require('../constants/http');
+const { updateAvailableRooms } = require('../utils/bookedHotelUtil');
 
 booked = async (req, res) => {
     try {
-        const {hotelName, recipientName, dateOfBooking, checkInDate,
+        const { hotelName, recipientName, dateOfBooking, checkInDate,
             checkOutDate, typeOfRoom, totalPrice, totalDays,
         } = req.body;
         const bookedHotel = new BookedHotel({
@@ -11,38 +12,40 @@ booked = async (req, res) => {
             typeOfRoom, totalPrice, totalDays,
         });
         bookedHotel.save();
-        res.json({bookedHotelId : bookedHotel._id});
-        hotel.updateAvailableRooms(hotelName);
-        res.status(200);
+        res.json({ bookedHotelId : bookedHotel._id });
+        updateAvailableRooms(hotelName);
+        res.status(http.Success);
         res.end();
     } catch (error) {
-        console.log(error);
-        res.status(500);
+        res.status(http.Bad_Request);
+        res.send('Internal Server Error');
     }
 };
 
 list= (req, res) => {
-    BookedHotel.find({recipientName : req.query.ID})
+    BookedHotel.find({ recipientName : req.query.ID })
         .then((data) => {
-            res.status(200);
+            res.status(http.Success);
             res.json(data);
             res.end();
         })
         .catch((e) => {
-            res.status(500);
+            res.status(http.Bad_Request);
+            res.send(e);
         });
     res.end;
 };
 
 view = (req, res) => {
-    BookedHotel.findOne({_id : req.query.ID})
+    BookedHotel.findOne({ _id : req.query.ID })
         .then((data) => {
-            res.status(200);
+            res.status(http.Success);
             res.json(data);
             res.end();
         })
         .catch((e) => {
-            res.status(500);
+            res.status(http.Bad_Request);
+            res.send(e);
         });
     res.end;
 };

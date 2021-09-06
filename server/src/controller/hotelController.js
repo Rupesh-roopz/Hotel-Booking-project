@@ -1,22 +1,29 @@
-const validation = require('../validations/hotelValidation');
-const hotel = require('../utils/hotelUtils');
+const { hotelValidation } = require('../validations/hotelValidation');
 const HotelData = require('../models/hotelsData');
+const http = require('../constants/http');
 
 add = async (req, res) => {
     try {
-        const {hotelName, totalRooms, roomsAvailable, address,
+        const { hotelName, totalRooms, roomsAvailable, address,
             phone, Single,
-            Double, Suit, description} = req.body;
-        const error =await validation.hotelValidation(hotelName, res);
+            Double, Suit, description } = req.body;
+        const error = await hotelValidation(req, res);
         const newHotel = new HotelData({
             hotelName, totalRooms, roomsAvailable, address,
             phone, Single, Double,
             Suit, description,
         });
-        hotel.sendResponse(res, error, newHotel);
+        if (Object.keys(error).length) {
+            res.status(http.Bad_Request).json({ error });
+        } else {
+            newHotel.save();
+            res.status(http.Success);
+            res.end();
+        }
     } catch (error) {
         console.log(error);
-        res.status(500);
+        res.status(http.Internal_Server_Error);
+        res.send('Internal Server Error');
     }
 };
 
@@ -26,7 +33,7 @@ show = (req, res) => {
             res.send(data);
         })
         .catch((e) => {
-            res.status(500).send(e);
+            res.status(http.Bad_Request).send(e);
         });
 };
 

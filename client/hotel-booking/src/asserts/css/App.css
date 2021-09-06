@@ -397,3 +397,29 @@ margin-top: 1rem ;
 .forbidden-text{
     color: white;
 }
+
+td {
+    width:30px;
+    height: 100px;
+}
+
+.sessionExpired-wrapper{
+    background-color: grey;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.sessionExpired-header{
+    color: rgb(185, 12, 12);
+    font-weight: 900;
+}
+
+.sessionExpired-text{
+    color: white;
+}
+.expire-button{
+    width: 100px;
+}

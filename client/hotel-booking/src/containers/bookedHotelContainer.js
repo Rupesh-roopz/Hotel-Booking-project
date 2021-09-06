@@ -1,8 +1,9 @@
 import React from 'react'
-import BookedHotelComponent from '../components/bookedHotelComponent'
+import BookedHotelComponent from '../components/BookedHotelComponent'
 import { withRouter } from 'react-router-dom'
-import NavigationContainer from './navigationContainer'
+import NavigationContainer from './NavigationContainer'
 import api from '../Resources/index'
+import http from '../constants/http'
 
 class BookedHotelContainer extends React.Component {
     constructor (props) {
@@ -37,7 +38,8 @@ class BookedHotelContainer extends React.Component {
                 this.setState({ hotelData : res.data })
             })
             .catch((e) => {
-                if (e.response.status === 403) { this.props.history.push('/forbidden') }
+                if (e.response.status === http.Forbidden) { this.props.history.push('/forbidden') }
+                if (e.response.status === http.Unauthorized) { this.props.history.push('/sessionExpired') }
             })
     }
 
@@ -47,7 +49,8 @@ class BookedHotelContainer extends React.Component {
                 this.setState({ userData : res.data })
             })
             .catch((e) => {
-                if (e.response.status === 403) { this.props.history.push('/forbidden') }
+                if (e.response.status === Forbidden) { this.props.history.push('/forbidden') }
+                if (e.response.status === http.Unauthorized) { this.props.history.push('/sessionExpired') }
             })
     }
 
@@ -85,22 +88,15 @@ class BookedHotelContainer extends React.Component {
 
     totalPrice () {
         const myObj = this.state.hotelData
-        console.log(myObj)
         const roomType = this.state.roomType
-        console.log(roomType)
         const price = myObj[roomType] * this.totalDays()
         return price
-    }
-
-    postHotelData = () => {
-
     }
 
     onSubmit = (event) => {
         event.preventDefault()
         this.totalDays()
         this.totalPrice()
-        this.postHotelData()
         const bookedHotelData = {
             hotelName : this.state.hotelData.hotelName,
             recipientName : sessionStorage.getItem('userName'),
@@ -111,15 +107,8 @@ class BookedHotelContainer extends React.Component {
             totalPrice : this.totalPrice(),
             totalDays : this.totalDays()
         }
-        api.postBookedHotelData(bookedHotelData)
-            .then((res) => {
-                console.log(res.data)
-                sessionStorage.setItem('bookedHotelId', res.data.bookedHotelId)
-                this.props.history.push('/verifyBookedHotel')
-            })
-            .catch((e) => {
-                console.log(e.response)
-            })
+        sessionStorage.setItem('data', JSON.stringify(bookedHotelData))
+        this.props.history.push('/verifyBookedHotel')
     }
 
     render () {

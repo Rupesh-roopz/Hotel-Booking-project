@@ -1,8 +1,9 @@
 import React from 'react'
-import HotelList from '../components/hotelListComponent'
+import HotelList from '../components/HotelListComponent'
 import { withRouter } from 'react-router-dom'
-import NavigationContainer from './navigationContainer'
+import NavigationContainer from './NavigationContainer'
 import api from '../Resources/index'
+import http from '../constants/http'
 
 class HotelsList extends React.Component {
     constructor (props) {
@@ -22,7 +23,8 @@ class HotelsList extends React.Component {
                 this.setState({ hotelsList : res.data })
             })
             .catch((e) => {
-                if (e.response.status === 403) { this.props.history.push('/forbidden') }
+                if (e.response.status === http.Forbidden) { this.props.history.push('/forbidden') }
+                if (e.response.status === http.Unauthorized) { this.props.history.push('/sessionExpired') }
             })
     }
 

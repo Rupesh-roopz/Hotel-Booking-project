@@ -2,7 +2,12 @@ import axios from 'axios'
 
 const instance = axios.create({
     baseURL : 'http://localhost:8800',
-    headers : { Authorization : `Bearer ${sessionStorage.getItem('token')}` }
+    withCredentials : true
+})
+instance.interceptors.request.use((config) => {
+    const token = sessionStorage.getItem('token')
+    config.headers.Authorization = token ? `Bearer ${token}` : ''
+    return config
 })
 
 export default {
@@ -72,5 +77,10 @@ export default {
             params : {
                 ID : sessionStorage.getItem('bookedHotelId')
             }
+        }),
+    clearSession : () =>
+        instance({
+            method : 'GET',
+            url : '/user/logout'
         })
 }

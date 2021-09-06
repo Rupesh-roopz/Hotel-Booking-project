@@ -18,7 +18,7 @@ function Admin (props) {
                             <label
                                 htmlFor = "hotelName"
                                 className = "form-label">
-                                        Hotel Name
+                                                Hotel Name
                             </label>
                         </div>
                         <div className = "row">
@@ -50,7 +50,7 @@ function Admin (props) {
                             <label
                                 htmlFor = "totalRooms"
                                 className = "form-label">
-                                    Total Number of Rooms
+                                            Total Number of Rooms
                             </label>
                             <input
                                 id = "totalRooms"
@@ -65,7 +65,7 @@ function Admin (props) {
                             <label
                                 htmlFor = "roomsAvailable"
                                 className = "form-label">
-                                    Number of Rooms Available
+                                            Number of Rooms Available
                             </label>
                             <input
                                 id = "roomsAvailable"
@@ -87,7 +87,7 @@ function Admin (props) {
                             <label
                                 htmlFor = "address"
                                 className = "form-label">
-                                    Address
+                                            Address
                             </label>
                             <input
                                 id = "address"
@@ -109,7 +109,7 @@ function Admin (props) {
                             <label
                                 htmlFor = "phone"
                                 className = "form-label">
-                                    Phone Number
+                                            Phone Number
                             </label>
 
                         </div>
@@ -137,7 +137,7 @@ function Admin (props) {
                             <label
                                 htmlFor = "description"
                                 className = "form-label">
-                                    Description
+                                            Description
                             </label>
                             <textarea
                                 id = "description"
@@ -159,13 +159,13 @@ function Admin (props) {
                     <div className = "row">
                         <fieldset>
                             <legend>
-                                    Price
+                                            Price
                             </legend>
                             <div className = "col-4">
                                 <label
                                     htmlFor = "Single"
                                     className = "form-label">
-                                        Single Room
+                                                Single Room
                                 </label>
                                 <input
                                     id = "Single"
@@ -185,7 +185,7 @@ function Admin (props) {
                                 <label
                                     htmlFor = "Double"
                                     className = "form-label">
-                                        Double Room
+                                                Double Room
                                 </label>
                                 <input
                                     id = "Double"
@@ -205,7 +205,7 @@ function Admin (props) {
                                 <label
                                     htmlFor = "Suit"
                                     className = "form-label">
-                                        Suit Room
+                                                Suit Room
                                 </label>
                                 <input
                                     id = "Suit"
@@ -220,7 +220,6 @@ function Admin (props) {
                                         {props.state.error.SuitError}
                                     </div>
                                     : <div/>}
-
                             </div>
                         </fieldset>
                     </div>
@@ -228,7 +227,7 @@ function Admin (props) {
                         <button
                             type = "sumbit"
                             className = "btn btn-primary">
-                                 Submit
+                                         Submit
                         </button>
                     </div>
                 </form>

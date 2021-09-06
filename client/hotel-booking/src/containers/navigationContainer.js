@@ -1,14 +1,13 @@
 import React from 'react'
-import NavigationComponent from '../components/navigationComponent'
-// import axios from 'axios'
+import NavigationComponent from '../components/NavigationComponent'
 import { withRouter } from 'react-router-dom'
 import api from '../Resources/index'
+import http from '../constants/http'
 
 class NavigationContainer extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
-            userName : '',
             data : {},
             isAdmin : false
         }
@@ -16,15 +15,11 @@ class NavigationContainer extends React.Component {
 
     componentDidMount () {
         this.getUserData()
-        this.setState({
-            userName : sessionStorage.getItem('userName')
-        })
     }
 
     getUserData = () => {
         api.getUserData()
             .then((res) => {
-                console.log(res.data.user)
                 if (res.data.user.isAdmin !== undefined) {
                     this.setState({
                         isAdmin : true
@@ -35,13 +30,18 @@ class NavigationContainer extends React.Component {
                 })
             })
             .catch((e) => {
-                if (e.response.status === 403) { this.props.history.push('/forbidden') }
+                if (e.response.status === http.Forbidden) { this.props.history.push('/forbidden') }
+                if (e.response.status === http.Unauthorized) { this.props.history.push('/sessionExpired') }
             })
     }
 
     handleLogout = () => {
+        window.localStorage.setItem('CREDENTIALS_FLUSH', Date.now().toString())
+        window.localStorage.removeItem('CREDENTIALS_FLUSH')
+        api.clearSession()
+        document.cookie = 'connect.sid=; expires=, 01 Jan 1970 00:00:00 UTC'
         sessionStorage.clear()
-        this.props.history.push('/')
+        this.props.history.push('/login')
     }
 
     hangleMyProfile = () => {
@@ -54,7 +54,6 @@ class NavigationContainer extends React.Component {
 
     render () {
         return <NavigationComponent
-            userData = {this.state}
             logout = {this.handleLogout}
             myProfile = {this.hangleMyProfile}
             bookings = {this.handleMyBookings}
@@ -62,4 +61,5 @@ class NavigationContainer extends React.Component {
         />
     }
 }
+
 export default withRouter(NavigationContainer)
