@@ -38,8 +38,8 @@ class BookedHotelContainer extends React.Component {
                 this.setState({ hotelData : res.data })
             })
             .catch((e) => {
-                if (e.response.status === http.Forbidden) { this.props.history.push('/forbidden') }
-                if (e.response.status === http.Unauthorized) { this.props.history.push('/sessionExpired') }
+                if (e.response.status === http.FORBIDDEN) { this.props.history.push('/forbidden') }
+                if (e.response.status === http.UNAUTHORIZED) { this.props.history.push('/sessionExpired') }
             })
     }
 
@@ -49,8 +49,8 @@ class BookedHotelContainer extends React.Component {
                 this.setState({ userData : res.data })
             })
             .catch((e) => {
-                if (e.response.status === Forbidden) { this.props.history.push('/forbidden') }
-                if (e.response.status === http.Unauthorized) { this.props.history.push('/sessionExpired') }
+                if (e.response.status === FORBIDDEN) { this.props.history.push('/forbidden') }
+                if (e.response.status === http.UNAUTHORIZED) { this.props.history.push('/sessionExpired') }
             })
     }
 

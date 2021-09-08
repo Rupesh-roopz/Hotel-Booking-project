@@ -9,7 +9,7 @@ async function updateAvailableRooms(hotelName) {
         })
         .catch((e)=>{
             console.log(e);
-            res.status(http.Bad_Request);
+            res.status(http.BAD_REQUEST);
             res.send('Internal Server Error');
         });
     await HotelData.updateOne({ hotelName },

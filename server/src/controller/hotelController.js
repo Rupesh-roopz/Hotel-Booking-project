@@ -14,15 +14,15 @@ add = async (req, res) => {
             Suit, description,
         });
         if (Object.keys(error).length) {
-            res.status(http.Bad_Request).json({ error });
+            res.status(http.BAD_REQUEST).json({ error });
         } else {
             newHotel.save();
-            res.status(http.Success);
+            res.status(http.SUCCESS);
             res.end();
         }
     } catch (error) {
         console.log(error);
-        res.status(http.Internal_Server_Error);
+        res.status(http.INTERNAL_SERVER_ERROR);
         res.send('Internal Server Error');
     }
 };
@@ -33,7 +33,7 @@ show = (req, res) => {
             res.send(data);
         })
         .catch((e) => {
-            res.status(http.Bad_Request).send(e);
+            res.status(http.BAD_REQUEST).send(e);
         });
 };
 

@@ -47,7 +47,7 @@ async function userValidation(req, res) {
         })
         .catch((e) => {
             console.log(e);
-            res.status(http.Internal_Server_Error);
+            res.status(http.INTERNAL_SERVER_ERROR);
         });
     await UserData.findOne({ email : req.body.email })
         .then((data) => {
@@ -60,7 +60,7 @@ async function userValidation(req, res) {
         })
         .catch((e) => {
             console.log(e);
-            res.status(http.Internal_Server_Error);
+            res.status(http.INTERNAL_SERVER_ERROR);
         });
     console.log(error);
     return error;

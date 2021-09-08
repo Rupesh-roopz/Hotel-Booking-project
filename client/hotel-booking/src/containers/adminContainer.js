@@ -52,8 +52,8 @@ class AdminPage extends React.Component {
                 })
                 .catch((e) => {
                     this.setState({ serverError : e.response.data.error })
-                    if (e.response.status === http.Forbidden) { this.props.history.push('/forbidden') }
-                    if (e.response.status === http.Unauthorized) { this.props.history.push('/sessionExpired') }
+                    if (e.response.status === http.FORBIDDEN) { this.props.history.push('/forbidden') }
+                    if (e.response.status === http.UNAUTHORIZED) { this.props.history.push('/sessionExpired') }
                 })
         }
     }

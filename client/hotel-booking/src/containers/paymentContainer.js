@@ -40,7 +40,7 @@ class PaymentContainer extends React.Component {
             })
             .catch((e) => {
                 console.log(e.response)
-                if (e.response.status === http.Unauthorized) { this.props.history.push('/sessionExpired') }
+                if (e.response.status === http.UNAUTHORIZED) { this.props.history.push('/sessionExpired') }
             })
     }
 

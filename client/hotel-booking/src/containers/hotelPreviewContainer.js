@@ -23,7 +23,7 @@ class HotelPreviewContainer extends React.Component {
                 this.setState({ hotelData : res.data })
             })
             .catch(e => {
-                if (e.response.status === http.Unauthorized) { this.props.history.push('/sessionExpired') }
+                if (e.response.status === http.UNAUTHORIZED) { this.props.history.push('/sessionExpired') }
             })
     }
 

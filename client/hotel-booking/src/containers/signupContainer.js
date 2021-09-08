@@ -55,7 +55,8 @@ class SignUp extends React.Component {
     }
 
     render () {
-        if (document.cookie) {
+        const value = ('; ' + document.cookie).split('; token=').pop().split(';')[0]
+        if (value) {
             return <Redirect to="/main" />
         } else {
             return <SignUpForm

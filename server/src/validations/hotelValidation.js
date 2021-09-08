@@ -63,7 +63,7 @@ async function hotelValidation(req, res) {
         })
         .catch((e) => {
             console.log(e);
-            res.status(http.Bad_Request);
+            res.status(http.BAD_REQUEST);
         });
     return error;
 }

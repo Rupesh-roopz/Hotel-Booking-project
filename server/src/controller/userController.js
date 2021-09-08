@@ -13,15 +13,15 @@ signIn = async (req, res) => {
             name, email, newPassword, mobileNumber, age, idProofNumber,
         });
         if (Object.keys(error).length) {
-            res.status(http.Bad_Request).json({ error });
+            res.status(http.BAD_REQUEST).json({ error });
         } else {
-            res.status(http.Success);
+            res.status(http.SUCCESS);
             newUser.save();
             res.end();
         }
     } catch (error) {
         console.log(error);
-        res.status(http.Internal_Server_Error);
+        res.status(http.INTERNAL_SERVER_ERROR);
     }
 };
 
@@ -39,9 +39,9 @@ login = (req, res) => {
                 const user = { email : data.email };
                 const accessToken =
                     jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-                req.session.user = data.name;
-                res.status(http.Success);
-                console.log('User Logged in');
+                res.cookie('token', accessToken,
+                    { expires : new Date(Date.now() + 900000) });
+                res.status(http.SUCCESS);
                 res.json({
                     accessToken : accessToken,
                     isAdmin : Admin,
@@ -50,17 +50,17 @@ login = (req, res) => {
                 });
                 res.end();
             } else {
-                res.status(http.Bad_Request)
+                res.status(http.BAD_REQUEST)
                     .json({ err : 'Invalid Login Credentials' });
                 res.end();
             }
         }).catch((e) => {
-            res.status(http.Bad_Request);
+            res.status(http.BAD_REQUEST);
             res.send('Please enter valid credentials');
         });
     } catch (error) {
         console.log(error);
-        res.status(http.Internal_Server_Error);
+        res.status(http.INTERNAL_SERVER_ERROR);
         res.send('Internal Server Error');
     }
 };
@@ -69,15 +69,15 @@ postUserData = (req, res) => {
     try {
         UserData.findOne({ name : req.query.ID },
         ).then((user) => {
-            res.status(http.Success).json({ user });
+            res.status(http.SUCCESS).json({ user });
             res.end();
         }) .catch((e) => {
-            res.status(http.Unauthorised);
+            res.status(http.UNAUTHORISED);
             res.send(e);
         });
     } catch (error) {
         console.log(error);
-        res.status(http.Internal_Server_Error);
+        res.status(http.INTERNAL_SERVER_ERROR);
         res.send('Internal server error');
     }
 };
@@ -85,9 +85,10 @@ postUserData = (req, res) => {
 logout = (req, res) => {
     try {
         console.log('User Logged out successfully');
-        req.session.destroy();
+        res.cookie('token', '',
+            { maxAge : 0 });
     } catch (error) {
-        res.status(http.Internal_Server_Error);
+        res.status(http.INTERNAL_SERVER_ERROR);
         res.send('Internal Server Error');
     }
 };

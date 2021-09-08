@@ -14,10 +14,10 @@ booked = async (req, res) => {
         bookedHotel.save();
         res.json({ bookedHotelId : bookedHotel._id });
         updateAvailableRooms(hotelName);
-        res.status(http.Success);
+        res.status(http.SUCCESS);
         res.end();
     } catch (error) {
-        res.status(http.Bad_Request);
+        res.status(http.BAD_REQUEST);
         res.send('Internal Server Error');
     }
 };
@@ -25,12 +25,12 @@ booked = async (req, res) => {
 list= (req, res) => {
     BookedHotel.find({ recipientName : req.query.ID })
         .then((data) => {
-            res.status(http.Success);
+            res.status(http.SUCCESS);
             res.json(data);
             res.end();
         })
         .catch((e) => {
-            res.status(http.Bad_Request);
+            res.status(http.BAD_REQUEST);
             res.send(e);
         });
     res.end;
@@ -39,12 +39,12 @@ list= (req, res) => {
 view = (req, res) => {
     BookedHotel.findOne({ _id : req.query.ID })
         .then((data) => {
-            res.status(http.Success);
+            res.status(http.SUCCESS);
             res.json(data);
             res.end();
         })
         .catch((e) => {
-            res.status(http.Bad_Request);
+            res.status(http.BAD_REQUEST);
             res.send(e);
         });
     res.end;

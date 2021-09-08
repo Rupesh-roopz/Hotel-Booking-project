@@ -23,8 +23,8 @@ class HotelsList extends React.Component {
                 this.setState({ hotelsList : res.data })
             })
             .catch((e) => {
-                if (e.response.status === http.Forbidden) { this.props.history.push('/forbidden') }
-                if (e.response.status === http.Unauthorized) { this.props.history.push('/sessionExpired') }
+                if (e.response.status === http.FORBIDDEN) { this.props.history.push('/forbidden') }
+                if (e.response.status === http.UNAUTHORIZED) { this.props.history.push('/sessionExpired') }
             })
     }
 

@@ -6,16 +6,16 @@ selectedHotel = (req, res) => {
         .then((data) => {
             if (data) {
                 selectedHotelData = data;
-                res.status(http.Success).json({ hotelID : data._id });
+                res.status(http.SUCCESS).json({ hotelID : data._id });
                 res.end();
             } else {
-                res.status(http.Unauthorised);
+                res.status(http.UNAUTHORISED);
                 res.send(e);
                 res.end();
             }
         })
         .catch((e) => {
-            res.status(http.Internal_Server_Error);
+            res.status(http.INTERNAL_SERVER_ERROR);
             res.send('Internal Server Error');
         });
 };
@@ -24,16 +24,16 @@ sendHotelPreview =(req, res) => {
     HotelData.findOne({ _id : req.query.ID })
         .then((data) => {
             if (data) {
-                res.status(http.Success).json(data);
+                res.status(http.SUCCESS).json(data);
                 res.end();
             } else {
-                res.status(http.Unauthorised);
+                res.status(http.UNAUTHORISED);
                 res.send(e);
                 res.end();
             }
         })
         .catch((e) => {
-            res.status(http.Internal_Server_Error);
+            res.status(http.INTERNAL_SERVER_ERROR);
             res.send('Internal Server Error');
         });
 };

@@ -30,7 +30,7 @@ class NavigationContainer extends React.Component {
                 })
             })
             .catch((e) => {
-                if (e.response.status === http.Forbidden) { this.props.history.push('/forbidden') }
+                if (e.response.status === http.FORBIDDEN) { this.props.history.push('/forbidden') }
                 if (e.response.status === http.Unauthorized) { this.props.history.push('/sessionExpired') }
             })
     }
@@ -39,7 +39,7 @@ class NavigationContainer extends React.Component {
         window.localStorage.setItem('CREDENTIALS_FLUSH', Date.now().toString())
         window.localStorage.removeItem('CREDENTIALS_FLUSH')
         api.clearSession()
-        document.cookie = 'connect.sid=; expires=, 01 Jan 1970 00:00:00 UTC'
+        document.cookie = 'token=; expires=, 01 Jan 1970 00:00:00 UTC'
         sessionStorage.clear()
         this.props.history.push('/login')
     }

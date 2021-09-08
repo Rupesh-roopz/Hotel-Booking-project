@@ -6,17 +6,12 @@ function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
     if (token == 'null') {
-        res.status(http.Forbidden);
+        res.status(http.FORBIDDEN);
         return;
-    }
-    if (req.session.user === undefined) {
-        console.log('User session expired');
-        req.session.destroy();
-        return res.sendStatus(http.Unauthorised);
     }
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, res) => {
         if (err) {
-            res.status(http.Unauthorised);
+            res.status(http.UNAUTHORISED);
             return;
         };
         next();
