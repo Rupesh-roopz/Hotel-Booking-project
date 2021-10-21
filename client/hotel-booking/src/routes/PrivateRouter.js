@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Route } from 'react-router-dom'
 import ForbiddenContainer from '../containers/ForbiddenContainer'
 import { useHistory } from 'react-router'
+import role from '../constants/Roles'
 
 const PrivateRoute = ({ component : Component, ...rest }) => {
     const history = useHistory()
@@ -39,13 +40,13 @@ const PrivateRoute = ({ component : Component, ...rest }) => {
 
     const loginId = sessionStorage.getItem('token')
     if (sessionStorage.length && loginId) {
-        if ((rest.role === 'ADMIN' || rest.role === 'USER') && JSON.parse(sessionStorage.getItem('isAdmin'))) {
+        if ((rest.role === role.admin || rest.role === role.user) && JSON.parse(sessionStorage.getItem('isAdmin'))) {
             return (
                 <Route {...rest} render = {props =>
                     <Component {...props} />
                 } />
             )
-        } else if (rest.role === 'USER' && !JSON.parse(sessionStorage.getItem('isAdmin'))) {
+        } else if (rest.role === role.user && !JSON.parse(sessionStorage.getItem('isAdmin'))) {
             return (
                 <Route {...rest} render = {props =>
                     <Component {...props} />

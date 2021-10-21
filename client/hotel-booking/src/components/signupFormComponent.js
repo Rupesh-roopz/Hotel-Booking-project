@@ -3,7 +3,7 @@ import React from 'react'
 
 function SignUpForm (props) {
     return (
-        <div className = "container-flex signIn-wrapper ">
+        <div className = "container-flex signIn-wrapper " data-testid="signin-component">
             <form onSubmit={props.handleOnSubmit} className="signIn-form">
                 <div className="col-6">
                     <label
@@ -18,6 +18,7 @@ function SignUpForm (props) {
                         value = {props.state.name}
                         onChange = {props.handleOnChange}
                         placeholder= "Enter Full Name"
+                        data-testid="signin-name"
                         required
                     />
                     {(props.state.error.nameTaken !== undefined)
@@ -35,6 +36,7 @@ function SignUpForm (props) {
                         value = {props.state.email}
                         onChange={props.handleOnChange}
                         placeholder= "Enter Email"
+                        data-testid="signin-email"
                         required
                     />
                     {(props.state.clientErrors !== null)
@@ -63,6 +65,7 @@ function SignUpForm (props) {
                             value = {props.state.newPassword}
                             onChange={props.handleOnChange}
                             placeholder= "Enter New Password"
+                            data-testid="signin-newPassword"
                             required
                         />
                         {(props.state.clientErrors !== null)
@@ -90,6 +93,7 @@ function SignUpForm (props) {
                             value = {props.state.newPasswordVerify}
                             onChange={props.handleOnChange}
                             placeholder= "Re-enter New Password"
+                            data-testid="signin-newPasswordVerify"
                             required
                         />
                         {(props.state.clientErrors !== null)
@@ -113,6 +117,7 @@ function SignUpForm (props) {
                         value = {props.state.mobileNumber}
                         onChange = {props.handleOnChange}
                         placeholder= "Enter Phone Number"
+                        data-testid="signin-mobileNumber"
                         required
                     />
                     {(props.state.clientErrors !== null)
@@ -136,6 +141,7 @@ function SignUpForm (props) {
                             value = {props.state.idProofNumber}
                             onChange={props.handleOnChange}
                             placeholder= "Aadhar Card Number"
+                            data-testid="signin-proof"
                             required
                         />
                         {(props.state.clientErrors !== null)
@@ -155,6 +161,7 @@ function SignUpForm (props) {
                             placeholder= "Enter Age"
                             min = "15"
                             max = "90"
+                            data-testid="signin-age"
                             required
                         />
                         {(props.state.clientErrors !== null)
@@ -167,16 +174,27 @@ function SignUpForm (props) {
                 <div className="row login-buttons">
                     <button
                         type = "submit "
-                        className = "btn btn-primary col-3">
+                        className = "btn btn-primary col-3"
+                        data-testid="signin-button"
+                    >
                             Sign in
                     </button>
 
                 </div>
                 <div className="row">
-                    <a className="row signin-link" onClick= {props.handleLogin}>Login instead</a>
+                    <a
+                        className="row signin-link"
+                        onClick= {props.handleLogin}
+                    >
+                        Login instead
+                    </a>
                 </div>
             </form>
-            <img src={homeImg} alt="homeImage" className="loginImage-wrapper" />
+            <img
+                src={homeImg}
+                alt="homeImage"
+                className="loginImage-wrapper"
+            />
         </div>
     )
 }

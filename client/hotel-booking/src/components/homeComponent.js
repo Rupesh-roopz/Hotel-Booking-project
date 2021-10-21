@@ -1,13 +1,31 @@
 import homeImg from '../asserts/images/homeImg.jpg'
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 
-function HomeComponent (props) {
+function HomeComponent () {
+    const history = useHistory()
     return (
-        <div>
+        <div data-testid="home-test">
             <div className = "wrapper">
-                <span className = "welcomeNote">Book your favourite hotel here!</span>
-                <button className = "btn homeButtons" onClick = {props.handleLogin}>Log in</button>
-                <button className = "btn homeButtons" onClick = {props.handleSignin}>Sign Up</button>
+                <span
+                    data-testid="welcome-text"
+                    className = "welcomeNote"
+                >Book your favourite hotel here!
+                </span>
+                <button
+                    data-testid="login-button"
+                    className = "btn homeButtons"
+                    onClick = {() => history.push('/login')}
+                >
+                    Log in
+                </button>
+                <button
+                    data-testid="signin-button"
+                    className = "btn homeButtons"
+                    onClick = {() => history.push('/signup')}
+                >
+                    Sign Up
+                </button>
             </div>
             <img src = {homeImg} alt = "homeImage" className = "homeImage-wrapper" />
         </div>

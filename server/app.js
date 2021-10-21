@@ -1,7 +1,6 @@
 const express = require( 'express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-// const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const router = require('./src/routes/index');
 require('dotenv').config();
@@ -17,13 +16,6 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(cookieParser());
-
-// app.use(session({
-//     secret : process.env.SESSION_SECRET,
-//     saveUninitialized : false,
-//     resave : false,
-//     cookie : { maxAge : 360000, httpOnly : false },
-// }));
 
 app.use('/', router());
 

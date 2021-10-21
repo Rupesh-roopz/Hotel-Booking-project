@@ -1,6 +1,6 @@
 function Admin (props) {
     return (
-        <div className = "container">
+        <div className = "container" data-testid='admin-container'>
             <div className="row hotelAdd-header">
                 <div><h1>Add New Hotel Details</h1></div>
             </div>
@@ -29,6 +29,7 @@ function Admin (props) {
                                     className = "form-control"
                                     onChange = {props.onChange}
                                     value = {props.state.hotelName}
+                                    data-testid='admin-hotelName'
                                     required
                                 />
                                 {!(props.state.error === null)
@@ -58,6 +59,7 @@ function Admin (props) {
                                 className = "form-control"
                                 value = {props.state.totalRooms}
                                 onChange = {props.onChange}
+                                data-testid='admin-totalRooms'
                                 required
                             />
                         </div>
@@ -73,6 +75,7 @@ function Admin (props) {
                                 className = "form-control"
                                 value = {props.state.roomsAvailable}
                                 onChange = {props.onChange}
+                                data-testid='admin-roomsAvailable'
                                 required
                             />
                             {!(props.state.error === null)
@@ -95,6 +98,7 @@ function Admin (props) {
                                 className = "form-control"
                                 onChange = {props.onChange}
                                 value = {props.state.address}
+                                data-testid='admin-address'
                                 required
                             />
                             {!(props.state.error === null)
@@ -121,6 +125,7 @@ function Admin (props) {
                                     className = "form-control"
                                     onChange = {props.onChange}
                                     value = {props.state.phone}
+                                    data-testid='admin-phone'
                                     required
                                 />
                                 {!(props.state.error === null)
@@ -147,6 +152,7 @@ function Admin (props) {
                                 value = {props.state.description}
                                 rows = "4"
                                 cols = "50"
+                                data-testid='admin-description'
                                 required
                             />
                             {!(props.state.error === null)
@@ -173,6 +179,7 @@ function Admin (props) {
                                     className = "form-control"
                                     onChange = {props.onChange}
                                     value = {props.state.Single}
+                                    data-testid='admin-singleRoomPrice'
                                     required
                                 />
                                 {!(props.state.error === null)
@@ -193,6 +200,7 @@ function Admin (props) {
                                     className = "form-control"
                                     onChange = {props.onChange}
                                     value = {props.state.Double}
+                                    data-testid='admin-doubleRoomPrice'
                                     required
                                 />
                                 {!(props.state.error === null)
@@ -213,6 +221,7 @@ function Admin (props) {
                                     className = "form-control"
                                     onChange = {props.onChange}
                                     value = {props.state.Suit}
+                                    data-testid='admin-suitRoomPrice'
                                     required
                                 />
                                 {!(props.state.error === null)
@@ -226,7 +235,9 @@ function Admin (props) {
                     <div className = "col hotelAdd-buttonWrapper">
                         <button
                             type = "sumbit"
-                            className = "btn btn-primary">
+                            className = "btn btn-primary"
+                            data-testid='admin-saveButton'
+                        >
                                          Submit
                         </button>
                     </div>

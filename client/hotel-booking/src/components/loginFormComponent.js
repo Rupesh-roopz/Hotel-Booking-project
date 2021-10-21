@@ -2,10 +2,10 @@ import homeImg from '../asserts/images/homeImg.jpg'
 
 function LoginForm (props) {
     return (
-        <div className="login-wrapper">
+        <div className="login-wrapper" data-testid="login-test">
             <form onSubmit = {props.onSubmit} id ="loginForm" className="login-form row" >
                 <div className="row">
-                    {!(props.state.serverError === null)
+                    {(props.state.serverError !== '')
                         ? <div className="errors-class">
                             {props.state.serverError}
                         </div>
@@ -21,6 +21,7 @@ function LoginForm (props) {
                         type = "email"
                         className ="form-control"
                         id = "email"
+                        data-testid = "loginEmail"
                         placeholder = "Enter email"
                         onChange = {props.onChange}
                         value = {props.state.email}
@@ -46,6 +47,7 @@ function LoginForm (props) {
                         placeholder = "Enter password"
                         value = {props.state.password}
                         onChange = {props.onChange }
+                        data-testid = "loginPassword"
                         ref={props.passwordreference}
                         required
                     />
@@ -58,6 +60,7 @@ function LoginForm (props) {
                 <div className="row login-buttons">
                     <button
                         type = "submit"
+                        data-testid = "loginSubmit"
                         className = "btn btn-primary col-4">
                             Log in
                     </button>

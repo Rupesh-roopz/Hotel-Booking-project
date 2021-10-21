@@ -1,6 +1,6 @@
 function BookedHotelComponent (props) {
     return (
-        <div className = "container-fluid ">
+        <div className = "container-fluid " >
             <div className = "row bookedHotel-name-Wrapper hotelNameFont">{props.state.hotelData.hotelName}</div>
             <div className = "col-4 bookedHotel-form-Wrapper " >
                 <form onSubmit = {props.onSubmit} className = "bookedHotel-Form">

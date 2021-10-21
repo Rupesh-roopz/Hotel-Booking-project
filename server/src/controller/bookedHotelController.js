@@ -2,7 +2,7 @@ const BookedHotel = require('../models/bookedHotels');
 const http = require('../constants/http');
 const { updateAvailableRooms } = require('../utils/bookedHotelUtil');
 
-booked = async (req, res) => {
+const booked = async (req, res) => {
     try {
         const { hotelName, recipientName, dateOfBooking, checkInDate,
             checkOutDate, typeOfRoom, totalPrice, totalDays,
@@ -22,7 +22,7 @@ booked = async (req, res) => {
     }
 };
 
-list= (req, res) => {
+const list= (req, res) => {
     BookedHotel.find({ recipientName : req.query.ID })
         .then((data) => {
             res.status(http.SUCCESS);
@@ -36,7 +36,7 @@ list= (req, res) => {
     res.end;
 };
 
-view = (req, res) => {
+const view = (req, res) => {
     BookedHotel.findOne({ _id : req.query.ID })
         .then((data) => {
             res.status(http.SUCCESS);

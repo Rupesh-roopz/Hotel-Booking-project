@@ -3,7 +3,6 @@ const http = require('../constants/http');
 
 async function userValidation(req, res) {
     const error = {};
-    console.log(req.body);
     const emailRegx = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     const passwordRegx =
      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
